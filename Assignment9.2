@@ -1,0 +1,18 @@
+1.studentDS = load 'studentDS.txt' using PigStorage(',')as(name:chararray,undertaken:chararray,dob:chararray,stream:chararray,grade:int,state:chararray,city:chararray);
+
+filstudent = Filter studentDS by grade <= 5;
+
+student_GROUP= GROUP filstudent ALL;
+student_COUNT = FOREACH student_GROUP GENERATE COUNT(filstudent);
+
+2.
+Filterstudent = FILTER studentDS BY state == 'Alaska';
+studentname = FOREACH Filterstudent generate name;
+
+3.filtercllg = filter studentDS by (undertaken == 'Goverment')AND (state == 'Alabama');
+studentcllg_GROUP= GROUP filtercllg ALL;
+cllg_COUNT = FOREACH studentcllg_GROUP GENERATE COUNT(filtercllg);
+
+4.filterstudentlist = filter studentDS by (state == 'Oregano')AND (stream == 'BE');
+studentnamelist = FOREACH filterstudentlist generate name;
+
